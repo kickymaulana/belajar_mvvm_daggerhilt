@@ -20,6 +20,7 @@ fun PenggunaScreen(modifier: Modifier, viewModel: PenggunaViewModel = viewModel(
 
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     val pengguna by viewModel.pengguna.collectAsStateWithLifecycle()
+    val remotePengguna by viewModel.remotePengguna.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -28,7 +29,8 @@ fun PenggunaScreen(modifier: Modifier, viewModel: PenggunaViewModel = viewModel(
     ) {
         Button(
             onClick = {
-                viewModel.getPengguna()
+//                viewModel.getPengguna()
+                viewModel.getPenggunaFromNetwork(3)
             }
         ) {
             Text(text = "Sapa Pengguna")
@@ -36,7 +38,7 @@ fun PenggunaScreen(modifier: Modifier, viewModel: PenggunaViewModel = viewModel(
         if (isLoading){
             CircularProgressIndicator()
         } else {
-            Text(text = "Selamat Datang ${pengguna.nama}")
+            Text(text = "Selamat Datang ${remotePengguna.nama}")
         }
     }
 
